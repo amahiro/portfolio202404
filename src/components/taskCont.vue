@@ -45,14 +45,28 @@ const sortableOptions = {
     dragClass: 'sortable-drag', 
 };
 
+function escapeHtml(html) {
+    return html.replace(/[&<>"']/g, function(match) {
+        return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[match];
+    });
+}
+
 function addNewList(name) {
+    let escapedInput = escapeHtml(name);
     if(typeof name !== "undefined") {
         const newTask = {
-            name: name
+            name: escapedInput
         };
         tasks.value[2].task.push(newTask);
     }
 }
+
 
 </script>
 <template>
