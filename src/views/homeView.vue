@@ -4,6 +4,7 @@ import fvCont from '../components/fvCont.vue'
 import aboutCont from '../components/aboutCont.vue'
 import colorPicker from '../components/colorPicker.vue'
 import topNews from '../components/topNews.vue'
+import taskCont from '../components/taskCont.vue'
 
 // 色の配列を定義
 const selectedColor = ref([
@@ -26,11 +27,11 @@ const handleColorUpdate = (color, index) => {
 <template>
     <div>
         <colorPicker v-model="selectedColor" :selectedColor="selectedColor" @update:selectedColor="handleColorUpdate" />
-        <!-- <headerCont />
-        <RouterView /> -->
         <fvCont :selectedColor="selectedColor" />
         <aboutCont />
         <topNews />
+        <topTabs />
+        <taskCont />
     </div>
 
 </template>

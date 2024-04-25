@@ -1,5 +1,5 @@
 <script setup>
-// import { ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
     selectedColor: Array,
@@ -9,10 +9,22 @@ const handleChange = (event, index) => {
     const color = event.target.value;
     emit('update:selectedColor', color, index); // インデックスを一緒に渡す
 };
+
+const colorPickerHide = ref(false);
+const scrollY = ref(window.scrollY);
+window.addEventListener('scroll', () => {
+    scrollY.value = window.scrollY;
+    if(  scrollY.value > 0 ) {
+        colorPickerHide.value = colorPickerHide
+    }else {
+        colorPickerHide.value = !colorPickerHide.value
+    }
+});
+
 </script>
 
 <template>
-    <div class="p-color-picker">
+    <div :class="{ 'p-color-picker': true, 'p-color-picker--hide': colorPickerHide }">
         <p>色を選択してください</p>
         <ul>
             <li v-for="(color, index) in props.selectedColor" :key="color">
@@ -39,6 +51,11 @@ const handleChange = (event, index) => {
     z-index: 999;
     background-color: #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, .16);
+    transition: all .3s ease;
+}
+
+.p-color-picker--hide {
+    transform: translateY(calc(100% - 20px));
 }
 
 .p-color-picker>p {
@@ -87,19 +104,26 @@ const handleChange = (event, index) => {
 
 @media screen and (max-width: 768px) {
     .p-color-picker {
-        width: 100px;
+        width: 120px;
         padding: 10px;
     }
+
+    .p-color-picker--hide {
+    transform: translateY(calc(100% - 5px));
+}
+
+
     .p-color-picker ul {
         gap: 5px;
     }
+
     .p-color-picker ul li {
-    width: calc((100% - 5px) / 2);
-}
-.p-color-picker ul li p {
-    margin-top: -5px;
-    font-size: 10px;
-}
+        width: calc((100% - 5px) / 2);
+    }
+
+    .p-color-picker ul li p {
+        font-size: 10px;
+    }
 
 }
 </style>

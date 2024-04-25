@@ -32,9 +32,6 @@
                 <li>
                     <RouterLink to="/news" :class="'hover'">お知らせ</RouterLink>
                 </li>
-                <li>
-                    <RouterLink to="/contact" :class="'hover'">お問い合わせ</RouterLink>
-                </li>
             </ul>
         </header>
     </div>
@@ -60,10 +57,6 @@
     height: fit-content;
     margin-bottom: -10px;
 }
-/* .l-header__logo a {
-    display: block;
-    height: fit-content;
-} */
 .l-header__logo svg {
     width: 80px;
     height: auto;
@@ -72,10 +65,10 @@
     display: flex;
     align-content: center;
     justify-content: flex-end;
-    gap: 40px;
+    gap: clamp(10px,4vw,40px);
 }
 .l-header__list a {
-    font-size: 16px;
+    font-size: clamp(14px,1.6vw,16px);
     font-weight: 600;
     color: #FFFFFF;
     font-family: 游ゴシック medium, yu gothic medium, 游ゴシック, yu gothic, メイリオ, meiryo, ヒラギノ角ゴ pro, hiragino kaku gothic pro, sans-serif;
@@ -83,9 +76,6 @@
 @media screen and (max-width: 768px) {
     .l-header {
         height: 60px;
-    }
-    .l-header__list {
-        display: none;
     }
     .l-header__logo svg {
         width: 60px;
